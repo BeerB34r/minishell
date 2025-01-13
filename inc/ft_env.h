@@ -26,6 +26,6 @@ int
 void	
 	mm_clearenv(void);	// FILE: environment.c
 //	used for functions that have to touch the *entire* environment (env, execve)
-const char *const *const
-	borrow_env(void);	// FILE: environment.c
+const char *const
+	*borrow_env(void);	// FILE: environment.c
 #endif
