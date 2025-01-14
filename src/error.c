@@ -37,6 +37,6 @@ const char *msg,
 const int retval
 )
 {
-	ft_dprintf(2, "%s() %s\n", func, msg);
+	ft_dprintf(2, "%s(): %s\n", func, msg);
 	return (retval);
 }

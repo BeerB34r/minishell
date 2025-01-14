@@ -13,6 +13,8 @@
 #include <libft.h>
 #include <ft_printf.h>
 
+int minishell(int argc, char **argv);
+
 int
 	main(
 int argc,
@@ -32,5 +34,5 @@ char **argv
 		ft_printf("%s\n", str);
 	else
 		ft_printf("sprintf failed\n");
-	return (0);
+	return (minishell(argc, argv));
 }

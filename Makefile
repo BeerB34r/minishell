@@ -14,7 +14,7 @@
 
 MAIN			=	$(addprefix $(SRCDIR)/,main.c)
 SRCFILES		=	environment.c environment_touchers.c environment_utils.c \
-					error.c
+					error.c minishell.c
 SRCSUBDIR		=	env
 SRCDIR			=	src
 SRCDIRS			=	$(SRCDIR) $(addprefix $(SRCDIR)/, $(SRCSUBDIR))
@@ -26,7 +26,7 @@ OBJDIR			=	bin
 LIBNAMES		=	libftprintf/libftprintf.a libft/libft.a
 LIBDIR			=	lib
 LIBINC			=	$(dir $(LIBS))
-LIBS			=	$(addprefix $(LIBDIR)/, $(LIBNAMES))
+LIBS			=	$(addprefix $(LIBDIR)/, $(LIBNAMES)) -lreadline
 # runs a command inside all library submakes
 define libscmd
 for dir in $(dir $(LIBS)); do \

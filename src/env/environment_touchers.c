@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <ft_env.h>
+#include <libft.h>
 #include <stdio.h>
 #include <unistd.h>
 //	prints all environment variables, equivalent to shell builtin env without
@@ -35,4 +36,20 @@ const char **argv
 	const char *const *const	env = borrow_env();
 
 	return (execve(pathname, (char *const *)argv, (char *const *)env));
+}
+
+const char
+	*mm_getenv(
+const char *name
+)
+{
+	const char *const *const	env = borrow_env();
+	int							i;
+
+	i = -1;
+	while (env && env[++i])
+		if (!ft_strncmp(name, env[i], ft_strlen(name))
+			&& env[i][ft_strlen(name)] == '=')
+			return (&env[i][ft_strlen(name) + 1]);
+	return (NULL);
 }
