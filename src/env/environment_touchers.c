@@ -14,6 +14,9 @@
 #include <libft.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <stdlib.h>
 //	prints all environment variables, equivalent to shell builtin env without
 //	any arguments
 void
@@ -34,8 +37,17 @@ const char **argv
 )
 {
 	const char *const *const	env = borrow_env();
+	const pid_t					pid = fork();
+	int							status;
 
-	return (execve(pathname, (char *const *)argv, (char *const *)env));
+	if (pid < 0)
+		return (1);
+	if (pid == 0)
+		exit(execve(pathname, (char *const *)argv, (char *const *)env));
+	waitpid(pid, &status, 0);
+	free_ar((char **)argv);
+	free((void *)pathname);
+	return (status);
 }
 
 const char

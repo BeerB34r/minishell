@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                       ::::::::             */
-/*   main.c                                            :+:    :+:             */
+/*   jobcontrol.c                                      :+:    :+:             */
 /*                                                    +:+                     */
 /*   By: mde-beer <mde-beer@student.codam.nl>        +#+                      */
 /*                                                  +#+                       */
-/*   Created: 2025/01/13 20:53:59 by mde-beer     #+#    #+#                  */
-/*   Updated: 2025/01/14 21:06:46 by mde-beer     ########   odam.nl          */
+/*   Created: 2025/01/15 15:01:19 by mde-beer     #+#    #+#                  */
+/*   Updated: 2025/01/15 15:55:12 by mde-beer     ########   odam.nl          */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <minishell.h>
+#include <ft_env.h>
 #include <libft.h>
-#include <ft_printf.h>
 
-int minishell(int argc, char **argv);
 
 int
-	main(
-int argc,
+	command(
 char **argv
+);
+//	set up some proper redirection and stuff, currently it does NOTHING with
+//	half of its god damned job
+int
+	run(
+t_job job
 )
 {
-	return (minishell(argc, argv));
+	int	ret;
+
+	ret = builtin(job.argv);
+	if (ret != -1)
+		return (ret);
+	ret = command(job.argv);
+	if (ret != -1)
+		return (ret);
+	return (-1);
 }

@@ -15,7 +15,7 @@
 const char
 	*mm_getenv(
 		const char *name
-		);	// FILE: environment.c
+		);	// FILE: environment_touchers.c
 //	equivalent to stdlib setenv()
 int		
 	mm_setenv(
@@ -28,4 +28,16 @@ void
 //	used for functions that have to touch the *entire* environment (env, execve)
 const char *const
 	*borrow_env(void);	// FILE: environment.c
+int
+	mm_execve(
+		const char *pathname,
+		const char **argv
+		);	// FILE: environment_touchers.c
+			// wrapper for execve, frees pathname and argv
+void
+	mm_printenv(void);	// FILE: environment_touchers.c
+void
+	free_ar(
+		char **ar
+		);	// FILE: environment_utils.c
 #endif

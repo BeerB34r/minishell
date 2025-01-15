@@ -11,10 +11,12 @@
 # **************************************************************************** #
 
 .PHONY			:	all re clean fclean run libclean
+.NOTPARALLEL	:	re
 
 MAIN			=	$(addprefix $(SRCDIR)/,main.c)
 SRCFILES		=	environment.c environment_touchers.c environment_utils.c \
-					error.c minishell.c
+					error.c minishell.c signals.c jobcontrol.c binlocation.c \
+					builtins.c
 SRCSUBDIR		=	env
 SRCDIR			=	src
 SRCDIRS			=	$(SRCDIR) $(addprefix $(SRCDIR)/, $(SRCSUBDIR))
@@ -26,7 +28,8 @@ OBJDIR			=	bin
 LIBNAMES		=	libftprintf/libftprintf.a libft/libft.a
 LIBDIR			=	lib
 LIBINC			=	$(dir $(LIBS))
-LIBS			=	$(addprefix $(LIBDIR)/, $(LIBNAMES)) -lreadline
+LIBS			=	$(addprefix $(LIBDIR)/, $(LIBNAMES))
+SYSLIBS			=	-lreadline
 # runs a command inside all library submakes
 define libscmd
 for dir in $(dir $(LIBS)); do \
@@ -60,7 +63,7 @@ re				:	fclean all
 run				:	$(NAME) ;	./$(NAME) $(PARAMS)
 
 $(NAME)			:	$(OBJFILES) $(LIBS)
-	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $(MAIN) $^ 
+	$(CC) $(CFLAGS) $(INCLUDE) $(SYSLIBS) -o $@ $(MAIN) $^
 
 $(OBJDIR)/%.o	:	%.c $(HEADERS)	| $(OBJDIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -c -o $@ $<

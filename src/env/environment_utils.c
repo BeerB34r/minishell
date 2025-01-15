@@ -13,7 +13,7 @@
 #include <libft.h>
 #include <stdlib.h>
 
-static void
+void
 	free_ar(
 char **ar
 )

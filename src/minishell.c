@@ -6,70 +6,81 @@
 /*   By: mde-beer <mde-beer@student.codam.nl>        +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2025/01/14 16:57:07 by mde-beer     #+#    #+#                  */
-/*   Updated: 2025/01/14 17:50:08 by mde-beer     ########   odam.nl          */
+/*   Updated: 2025/01/15 07:57:41 by mde-beer     ########   odam.nl          */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
+#include <ft_printf.h>
 #include <ft_error.h>
 #include <ft_env.h>
+#include <minishell.h>
 #include <stdlib.h>
 #include <readline/readline.h>
-#include <ft_printf.h>
-#define INTERACTIVE 1
-#define CMDSTRING 2
-#define ARGUMENTATION 3
-#define DEFAULT_PROMPT "Σ:3 "
+#include <signal.h>
+#include <unistd.h>
 
-int
-	check_valid(
-char *input
+void default_sigint(int signo, siginfo_t *siginfo, void *context);
+void default_sigquit(int signo, siginfo_t *siginfo, void *context);
+void attach_handler(struct sigaction *handler,
+		void (*function)(int, siginfo_t *, void *), int signal);
+int	run(t_job job);
+
+void
+	set_env_defaults(
+const char *bin
 )
 {
-	if (!ft_strncmp(input, "invalid", ft_strlen(input)))
-		return (1);
-	return (0);
+	const char	*temp;
+
+	if (!mm_getenv("PS1"))
+		mm_setenv("PS1", DEFAULT_PROMPT);
+	if (!mm_getenv("PS2"))
+		mm_setenv("PS2", DEFAULT_CONTINUATION);
+	if (!mm_getenv("SHELL"))
+		mm_setenv("SHELL", bin);
+	if (!mm_getenv("PWD"))
+	{
+		temp = getcwd(NULL, 0);
+		mm_setenv("PWD", temp);
+		free((void *)temp);
+	}
 }
 
-char
-	*parse(
-char *input
+void
+	set_sig_defaults(
+struct sigaction handlers[HANDLER_COUNT]
 )
 {
-	return (input);
+	attach_handler(&handlers[0], &default_sigint, SIGINT);
+	attach_handler(&handlers[1], &default_sigquit, SIGQUIT);
 }
 
-int
-	run_command(
-char *input
-)
-{
-	ft_printf("command ran: %s\n", input);
-	return (0);
-}
 //	interactive mode currently
+//	determine proper amount of sighandlers
 int
 	minishell(
 int argc,
 char **argv
 )
 {
-	char	*input;
+	struct sigaction	handlers[HANDLER_COUNT];
+	char				*input;
+	char				*message;
 
-	// insert signal handlers
+	set_env_defaults(argv[0]);
+	set_sig_defaults(handlers);
+	message = NULL;
 	(void)argc;
-	(void)argv;
-	if (!mm_getenv("PS1"))
-		mm_setenv("PS1", DEFAULT_PROMPT);
 	while (1)
 	{
 		input = readline(mm_getenv("PS1"));
 		if (!input)
-			ft_uerror(__func__, "no input", 0);
-		else if (check_valid(input))
-			ft_uerror(__func__, "invalid input", 0);
-		else if (run_command(parse(input)))
-			ft_uerror(__func__, "execution error", 0);
+			return (ft_printf("exit\n"), 0);
+		else if (run((t_job){.argv = ft_split(input, ' '), {0}}))
+			ft_uerror(__func__, "job failed", 0);
 		free(input);
 	}
+	(void)input;
+	return (0);
 }
