@@ -15,10 +15,6 @@
 #include <libft.h>
 
 
-int
-	command(
-char **argv
-);
 //	set up some proper redirection and stuff, currently it does NOTHING with
 //	half of its god damned job
 int
@@ -31,7 +27,7 @@ t_job job
 	ret = builtin(job.argv);
 	if (ret != -1)
 		return (ret);
-	ret = command(job.argv);
+	ret = command((const char **)job.argv);
 	if (ret != -1)
 		return (ret);
 	return (-1);

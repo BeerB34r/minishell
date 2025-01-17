@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY			:	all re clean fclean run libclean
+.PHONY			:	all clean fclean re run
 .NOTPARALLEL	:	re
 
 MAIN			=	$(addprefix $(SRCDIR)/,main.c)
