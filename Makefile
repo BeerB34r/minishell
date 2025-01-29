@@ -61,6 +61,10 @@ all				:	$(NAME)
 $(OBJDIR)		: ;	mkdir $(OBJDIR)
 re				:	fclean all
 run				:	$(NAME) ;	./$(NAME) $(PARAMS)
+debug			:	CFLAGS += -g
+debug			:	re
+clangd			:	fclean
+	intercept-build-14 $(MAKE) all
 
 $(NAME)			:	$(OBJFILES) $(LIBS)
 	$(CC) $(CFLAGS) $(INCLUDE) $(SYSLIBS) -o $@ $(MAIN) $^
