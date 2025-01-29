@@ -66,11 +66,9 @@ char **argv
 {
 	struct sigaction	handlers[HANDLER_COUNT];
 	char				*input;
-	char				*message;
 
 	set_env_defaults(argv[0]);
 	set_sig_defaults(handlers);
-	message = NULL;
 	(void)argc;
 	while (1)
 	{

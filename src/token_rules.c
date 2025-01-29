@@ -20,7 +20,7 @@ int *pos
 {
 	const char	init = input[*pos];
 
-	if (init != '\\' && init != '\'' && init '\"')
+	if (init != '\\' && init != '\'' && init != '\"')
 		return (0);
 	if (init == '\\')
 	{
