@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                       ::::::::             */
+/*   ft_vector.c                                       :+:    :+:             */
+/*                                                    +:+                     */
+/*   By: mde-beer <mde-beer@student.codam.nl>        +#+                      */
+/*                                                  +#+                       */
+/*   Created: 2025/01/31 17:31:03 by mde-beer     #+#    #+#                  */
+/*   Updated: 2025/01/31 17:31:06 by mde-beer     ########   odam.nl          */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <ft.h>
 
 #define INITIAL_CAPACITY 128
@@ -46,7 +58,8 @@ static bool	safe_realloc(t_vector *vector)
 		ft_delete_vector(vector);
 		return (false);
 	}
-	ft_memmove(new_contents, vector->contents, vector->size * vector->elem_size);
+	ft_memmove(new_contents,
+		vector->contents, vector->size * vector->elem_size);
 	ft_free(vector->contents);
 	vector->contents = new_contents;
 	return (true);

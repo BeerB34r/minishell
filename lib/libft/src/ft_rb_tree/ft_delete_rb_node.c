@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                       ::::::::             */
+/*   ft_delete_rb_node.c                               :+:    :+:             */
+/*                                                    +:+                     */
+/*   By: mde-beer <mde-beer@student.codam.nl>        +#+                      */
+/*                                                  +#+                       */
+/*   Created: 2025/01/31 17:24:58 by mde-beer     #+#    #+#                  */
+/*   Updated: 2025/01/31 17:25:00 by mde-beer     ########   odam.nl          */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <ft.h>
 
 static void	exchange_items(t_rb_node *node, t_rb_node *descendant)

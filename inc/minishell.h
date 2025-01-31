@@ -20,8 +20,6 @@
 # include <stdbool.h>	//	bool
 # include <sys/types.h> //	pid_t
 //	typedefs
-typedef struct s_tokenisation_output	t_tokenisation;
-typedef struct s_individual_token		t_token;
 typedef struct s_builtin_utility		t_builtin;
 typedef struct s_execve_environments	t_execve;
 typedef struct s_simple_command			t_command;
@@ -41,19 +39,6 @@ enum e_token_type
 };
 
 // structs
-struct s_individual_token
-{
-	char				*start;
-	char				*end;
-	enum e_token_type	type;
-	t_token				*next;
-};
-struct s_tokenisation_output
-{
-	enum e_tokenisation_result_type	type;
-	t_token							*head;
-	int								count;
-};
 struct s_builtin_utility
 {
 	const char	*name;

@@ -16,7 +16,7 @@
 MAIN			=	$(addprefix $(SRCDIR)/,main.c)
 SRCFILES		=	environment.c environment_touchers.c environment_utils.c \
 					error.c minishell.c signals.c jobcontrol.c binlocation.c \
-					builtins.c
+					builtins.c execution.c
 SRCSUBDIR		=	env
 SRCDIR			=	src
 SRCDIRS			=	$(SRCDIR) $(addprefix $(SRCDIR)/, $(SRCSUBDIR))
@@ -46,7 +46,7 @@ HEADERS			=	ft_env.h
 INCSUBDIR		=	env
 INCDIR			=	inc
 INCDIRS			=	$(INCDIR) $(addprefix $(INCDIR)/, $(INCSUBDIR))
-INCLUDE			=	$(addprefix -I, $(INCDIRS) $(LIBINC))
+INCLUDE			=	$(addprefix -isystem, $(INCDIRS) $(LIBINC))
 
 VPATH			=	$(SRCDIRS) $(INCDIRS)
 CC				=	cc

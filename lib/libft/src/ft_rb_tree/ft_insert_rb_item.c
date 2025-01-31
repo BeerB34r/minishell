@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                       ::::::::             */
+/*   ft_insert_rb_item.c                               :+:    :+:             */
+/*                                                    +:+                     */
+/*   By: mde-beer <mde-beer@student.codam.nl>        +#+                      */
+/*                                                  +#+                       */
+/*   Created: 2025/01/31 17:25:09 by mde-beer     #+#    #+#                  */
+/*   Updated: 2025/01/31 17:25:11 by mde-beer     ########   odam.nl          */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <ft.h>
 
 static t_rb_node	*find_and_create(t_rb_node **root, t_rb_node *parent,

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                       ::::::::             */
+/*   ft_balance_rb_tree_delete.c                       :+:    :+:             */
+/*                                                    +:+                     */
+/*   By: mde-beer <mde-beer@student.codam.nl>        +#+                      */
+/*                                                  +#+                       */
+/*   Created: 2025/01/31 17:26:14 by mde-beer     #+#    #+#                  */
+/*   Updated: 2025/01/31 17:26:15 by mde-beer     ########   odam.nl          */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <ft.h>
 
 void	ft_balance_rb_tree_delete(t_rb_node *node)
@@ -16,5 +28,5 @@ void	ft_balance_rb_tree_delete(t_rb_node *node)
 		else
 			ft_rb_node_rotate_right(node->parent);
 	}
-	// TODO balancing
 }
+// TODO balancing

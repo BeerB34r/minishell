@@ -38,7 +38,8 @@ static t_vector	*extend(
 	return (line);
 }
 
-static bool	get_with_buffer(t_pos_buffer *pb, int fd, t_vector *line, const char n)
+static bool
+	get_with_buffer(t_pos_buffer *pb, int fd, t_vector *line, const char n)
 {
 	ssize_t		start;
 	ssize_t		end;
