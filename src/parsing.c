@@ -29,20 +29,48 @@ struct s_token_list
 
 void
 	free_token(
-t_token *token
+void *token
 )
 {
-	free(token->original);
-	free(token->expanded);
+	const t_token	*actual_token = token;
+
+	free(actual_token->original);
+	free(actual_token->expanded);
 }
+
+t_token
+	get_next_token(
+const char **input
+)
+{
+	t_token	out;
+
+	out = (t_token){0};
+	while (*input)
+	{
+
+	}
+	return (out);
+}
+
 int
 	mini_split(
-const char *const input,
+const char *input,
 t_tokens *result
 )
 {
 	t_tokens	out;
 	t_token		current;
 
-	ft_init_vector(&out.list, sizeof(t_token), (t_cleanf)free_token);
+	ft_init_vector(&out.list, sizeof(t_token), free_token);
+	while (*input)
+	{
+		current = get_next_token(&input);
+		if (!current.original)
+			break ;
+		if (ft_append_vector(&out.list, *(void**)&current))
+			return (ft_delete_vector(&out.list), 1);
+	}
+	*result = out;
+	return (0);
 }
