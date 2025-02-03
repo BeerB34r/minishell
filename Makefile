@@ -16,7 +16,8 @@
 MAIN			=	$(addprefix $(SRCDIR)/,main.c)
 SRCFILES		=	environment.c environment_touchers.c environment_utils.c \
 					error.c minishell.c signals.c jobcontrol.c binlocation.c \
-					builtins.c execution.c
+					builtins.c execution.c token.c token_utils.c ft_recalloc.c \
+
 SRCSUBDIR		=	env
 SRCDIR			=	src
 SRCDIRS			=	$(SRCDIR) $(addprefix $(SRCDIR)/, $(SRCSUBDIR))

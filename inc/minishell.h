@@ -6,7 +6,7 @@
 /*   By: mde-beer <mde-beer@student.codam.nl>        +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2025/01/14 21:30:53 by mde-beer     #+#    #+#                  */
-/*   Updated: 2025/01/14 21:38:52 by mde-beer     ########   odam.nl          */
+/*   Updated: 2025/02/03 19:01:59 by mde-beer     ########   odam.nl          */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,16 @@ int
 	builtin_env(
 		char **argv
 		);	// FILE: builtins.c
+//	//	Helpers
+int			
+	ft_recalloc(	
+		void **ptr,
+		size_t old_nmemb,
+		size_t new_nmemb,
+		size_t size
+		);	// FILE: ft_recalloc.c
+void
+	free_ar(
+		char **ar
+		);	// FILE: env/enviornment_utils.c
 #endif
