@@ -67,12 +67,16 @@ t_command
 t_token **tokens
 )
 {
-	t_command	*out;
+	t_command *const	out = ft_calloc(1, sizeof(t_command));
 
-	out = NULL;
+	if (!out)
+		return (NULL);
+	out->commands = ft_calloc(1, sizeof(t_execve));
 	while ((*tokens)->literal)
 	{
-
+		if ((*tokens)->type == redirection_operator)
+		{
+		}
 	}
 	return (out);
 };
