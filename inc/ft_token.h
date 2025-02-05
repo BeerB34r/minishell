@@ -12,34 +12,54 @@
 
 #ifndef FT_TOKEN_H
 # define FT_TOKEN_H
+//	datatypes
+//	//	typedefs
+typedef struct s_token	t_token;
+//	//	enums
+enum e_token_type
+{
+	undetermined,
+	word,
+	control_operator,
+	redirection_operator,
+};
+//	//	structs
+struct s_token
+{
+	char				*literal;
+	enum e_token_type	type;
+};
 //	Porcelain
-char
-	**mm_strtokenise(
+t_token	
+	*mm_tokenise(
 		const char *input
 		);	// FILE: token.c
 //	Plumbing
-void
+void	
 	end_token(
-		const char **token
+		const char **token,
+		enum e_token_type *type
 		);	// FILE: token.c
-void
+void	
 	end_operator(
-		const char **token
+		const char **token,
+		enum e_token_type *type
 		);	// FILE: token_utils.c
 const char
 	*operator_length(
-		const char *opstart
+		const char *opstart,
+		enum e_token_type *type
 		);	// FILE: token_utils.c
 //	Helpers
-int	
+int		
 	isoperator(
 		char c
 		);	// FILE: token_utils.c
-int	
+int		
 	isredir(
 		char c
 		);	// FILE: token_utils.c
-int
+int		
 	nonly_ctype(
 		const char *string,
 		int n,

@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY			:	all clean fclean re run
+.PHONY			:	all clean fclean re run toktest
 .NOTPARALLEL	:	re
 
 MAIN			=	$(addprefix $(SRCDIR)/,main.c)
@@ -83,5 +83,10 @@ clean			:
 fclean			:	clean
 	rm -f $(NAME)
 	+@$(call libscmd, fclean)
+
+# unit tests
+toktest			:	$(addprefix $(OBJDIR)/, token.o token_utils.o ft_recalloc.o) $(LIBS)
+	$(CC) $(CFLAGS) $(INCLUDE) $(SYSLIBS) -o $@ test/toktest.c $^
+	./$@
 # canceling the implicit rules
 %.o				:	%.c

@@ -6,7 +6,7 @@
 /*   By: mde-beer <mde-beer@student.codam.nl>        +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2025/02/03 18:58:12 by mde-beer     #+#    #+#                  */
-/*   Updated: 2025/02/03 18:58:38 by mde-beer     ########   odam.nl          */
+/*   Updated: 2025/02/04 11:31:00 by mde-beer     ########   odam.nl          */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ size_t size
 		copy_len = new_nmemb * size;
 	else
 		copy_len = old_nmemb * size;
-	if (*ptr)
+	if (old_nmemb && *ptr)
 		ft_memcpy(new, *ptr, copy_len);
 	if (*ptr)
 		free(*ptr);

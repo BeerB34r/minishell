@@ -12,6 +12,7 @@
 
 #include <libft.h>
 #include <stddef.h>
+#include <ft_token.h>
 
 int
 	isoperator(
@@ -54,15 +55,16 @@ int (func)(int)
 
 const char
 	*operator_length(
-const char *opstart
+const char *opstart,
+enum e_token_type *type
 )
 {
-	const char	*operators[] = {
+	const char *const	operators[] = {
 		">", "<", ">|", "<<", ">>", "<&", ">&", "<<-", "<>",
 		"&", "&&", "(", ")", ";", ";;", ";&", "\n", "|", "||", NULL };
-	int			longest;
-	int			current;
-	int			i;
+	int					longest;
+	int					current;
+	int					i;
 
 	longest = 0;
 	i = -1;
@@ -74,16 +76,20 @@ const char *opstart
 		if (current > longest)
 			longest = current;
 	}
+	if (*opstart == '<' || '>' == *opstart)
+		*type = redirection_operator;
+	else
+		*type = control_operator;
 	return (opstart + longest);
 }
 
+//	The only reason this function exists is cuz i can't be bothered to refactor
+//	it out lmao -Mats
 void
 	end_operator(
-const char **token
+const char **token,
+enum e_token_type *type
 )
 {
-	const char	*in;
-
-	in = operator_length(*token);
-	*token = in;
+	*token = operator_length(*token, type);
 }

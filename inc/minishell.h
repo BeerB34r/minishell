@@ -31,12 +31,6 @@ enum e_tokenisation_result_type
 	partial,
 	complete
 };
-enum e_token_type
-{
-	undetermined,
-	word,
-	operator
-};
 
 // structs
 struct s_builtin_utility

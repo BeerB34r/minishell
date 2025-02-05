@@ -22,13 +22,15 @@
 
 void
 	end_token(
-const char **token
+const char **token,
+enum e_token_type *type
 )
 {
 	const char	*in;
 	char		escape;
 
 	in = *token;
+	*type = word;
 	while (*in)
 	{
 		escape = *in;
@@ -45,22 +47,35 @@ const char **token
 		in++;
 	}
 	if (isredir(*in) && nonly_ctype(*token, in - *token, ft_isdigit))
-		end_operator(&in);
+		end_operator(&in, type);
 	*token = in;
 }
 
-char
-	**mm_strtokenise(
+static void
+	free_tokens(
+t_token *tokens
+)
+{
+	int	i;
+
+	i = -1;
+	while (tokens[++i].literal)
+		free(tokens[i].literal);
+	free(tokens);
+}
+
+t_token
+	*mm_tokenise(
 const char *input
 )
 {
 	const char	*start;
-	char		**output;
-	char		*current;
+	t_token		*output;
+	t_token		current;
 	int			count;
 
 	count = 1;
-	output = calloc(0, sizeof(char *));
+	output = ft_calloc(count, sizeof(t_token));
 	while (*input)
 	{
 		while (isblank(*input))
@@ -69,12 +84,12 @@ const char *input
 			break ;
 		start = input;
 		if (isoperator(*start))
-			end_operator(&input);
+			end_operator(&input, &current.type);
 		else
-			end_token(&input);
-		current = ft_substr(start, 0, input - start);
-		if (ft_recalloc((void **)&output, count, count + 1, sizeof(char *)))
-			return (free_ar(output), NULL);
+			end_token(&input, &current.type);
+		current.literal = ft_substr(start, 0, input - start);
+		if (ft_recalloc((void **)&output, count, count + 1, sizeof(t_token)))
+			return (free_tokens(output), NULL);
 		output[count++ - 1] = current;
 	}
 	return (output);
